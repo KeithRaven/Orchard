@@ -1,0 +1,11 @@
+﻿
+@using Orchard.ContentManagement
+@using Orchard.Utility.Extensions
+@using Orchard.DisplayManagement.Descriptors;
+
+@{
+    var displayHelper = Display;
+    displayHelper.BindingAction = BindingAction.Angular;
+}
+
+@DisplayChildren(Model.Content)

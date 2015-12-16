@@ -1,0 +1,7 @@
+﻿@using Raven.AsyncShapes.Extensions
+@{
+    
+    string name = Model.ContentField.DisplayName;
+    name = name.ToCamelCase();
+}
+<p class="text-field" ng-if="model.@(name).value"><span class="name">@name:</span> <span class="value" ng-bind="model.@(name).value"></span></p>

@@ -153,7 +153,7 @@ namespace Orchard.DisplayManagement.Implementation {
                     }
                 }
 
-                if (shapeTable.Bindings.TryGetValue(string.Concat(displayContext.BindingAction.ToString(), "|", shapeAlternate), out shapeBinding)) {
+                if (shapeTable.Bindings.TryGetValue(string.Concat(displayContext.BindingAction.ToString(), "@", shapeAlternate), out shapeBinding)) {
                     return true;
                 }
             }
@@ -169,10 +169,10 @@ namespace Orchard.DisplayManagement.Implementation {
                     }
                 }
 
-                if (shapeTable.Bindings.TryGetValue(string.Concat(displayContext.BindingAction.ToString(), "|", shapeTypeScan), out shapeBinding)) {
+                if (shapeTable.Bindings.TryGetValue(string.Concat(displayContext.BindingAction.ToString(), "@", shapeTypeScan), out shapeBinding)) {
                     return true;
                 }
-
+               
                 var delimiterIndex = shapeTypeScan.LastIndexOf("__");
                 if (delimiterIndex < 0) {
                     shapeBinding = null;

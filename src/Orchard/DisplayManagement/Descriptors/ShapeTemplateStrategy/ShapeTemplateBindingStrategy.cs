@@ -16,6 +16,7 @@ using Orchard.FileSystems.VirtualPath;
 using Orchard.Logging;
 using Orchard.Mvc.ViewEngines.ThemeAwareness;
 using Orchard.Utility.Extensions;
+using System;
 
 namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy {
     public class ShapeTemplateBindingStrategy : IShapeTableProvider {
@@ -126,8 +127,17 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy {
                         iter.shapeContext.harvestShapeHit.ShapeType,
                         featureDescriptor.Id);
 
+                    var bindingAction = BindingAction.Display;
+
+                    if (iter.shapeContext.harvestShapeHit.ShapeType.Contains("@")) {
+                        var shapeParts = iter.shapeContext.harvestShapeHit.ShapeType.Split('@');
+                        iter.shapeContext.harvestShapeHit.ShapeType = shapeParts[1];
+                        Enum.TryParse<BindingAction>(shapeParts[0], true, out bindingAction);
+                    }
+
                     builder.Describe(iter.shapeContext.harvestShapeHit.ShapeType)
                         .From(new Feature { Descriptor = featureDescriptor })
+                        .Action(bindingAction)
                         .BoundAs(
                             hit.shapeContext.harvestShapeInfo.TemplateVirtualPath,
                             shapeDescriptor => displayContext => Render(shapeDescriptor, displayContext, hit.shapeContext.harvestShapeInfo, hit.shapeContext.harvestShapeHit));

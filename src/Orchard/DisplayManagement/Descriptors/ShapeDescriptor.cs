@@ -8,7 +8,8 @@ namespace Orchard.DisplayManagement.Descriptors {
 
     public enum BindingAction {
         Display,
-        Translate
+        Translate,
+        Angular
     }
 
     public class ShapeDescriptor {

@@ -65,7 +65,7 @@ namespace Orchard.DisplayManagement.Descriptors {
                 };
 
                 // ShapeDescriptor.Bindings is a case insensitive dictionary
-                descriptor.Bindings[string.Format("{0}|{1}", _bindingAction.ToString(), _bindingName)] = binding;
+                descriptor.Bindings[string.Format("{0}@{1}", _bindingAction.ToString(), _bindingName)] = binding;
 
             });
         }

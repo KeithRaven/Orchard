@@ -1,0 +1,3 @@
+[submodule "src/Orchard.Web/Modules/Raven.Api"]
+	path = src/Orchard.Web/Modules/Raven.Api
+	url = https://github.com/KeithRaven/Raven.Api.git

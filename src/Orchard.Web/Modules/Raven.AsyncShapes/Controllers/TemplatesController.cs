@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Orchard;
 using Orchard.DisplayManagement.Descriptors;
 using Orchard.Mvc;
-using Raven.Api.DisplayManagement;
 
 namespace Raven.AsyncShapes.Controllers
 {
@@ -20,13 +19,13 @@ namespace Raven.AsyncShapes.Controllers
         }
 
         // GET: Templates
-        public ActionResult Index(string contentType, string displayType = "summary")
+        public ActionResult Index(BindingAction templateType, string contentType, string displayType = "Summary")
         {
-            contentType = "Simple";
-            displayType = "Summary";
+
+            ViewBag.TemplateType = templateType;
 
             var model = _services.ContentManager.New(contentType);
-            var vm = _services.ContentManager.BuildDisplay(model);
+            var vm = _services.ContentManager.BuildDisplay(model, displayType);
             return View(vm);
         }
     }

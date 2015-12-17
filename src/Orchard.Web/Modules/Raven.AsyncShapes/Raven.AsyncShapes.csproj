@@ -111,6 +111,8 @@
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Extensions\DisplayHelperExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Services\AngularAsyncTemplateProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

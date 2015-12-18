@@ -7,5 +7,20 @@
     var displayHelper = Display;
     displayHelper.BindingAction = BindingAction.Angular;
 }
+<header>  
+    @if (Model.Meta != null)
+    {
+        Display(Model.Meta);
+    }  
 
-@DisplayChildren(Model.Content)
+    @Display(Model.Header)
+</header>
+
+@Display(Model.Content)
+
+@if (Model.Footer != null)
+{
+    <footer>
+        @Display(Model.Footer);
+    </footer>
+}

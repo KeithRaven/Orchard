@@ -5,7 +5,7 @@ angular.module("AsyncShapes").controller('AsyncShapesCntrl', ['$scope', '$http',
 
     $scope.updateItem = function (id) {
 
-        $http.get('/OrchardLocal/api/raven.api/Detail/' + id).then(function (response) {
+        $http.get('/api/raven.api/Detail/' + id).then(function (response) {
             $scope.model = response.data;
         });
 

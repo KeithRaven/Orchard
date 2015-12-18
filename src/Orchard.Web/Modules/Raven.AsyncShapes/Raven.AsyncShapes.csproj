@@ -68,9 +68,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Lib\angular-resource.js" />
-    <Content Include="Assets\Lib\angular-sanitize.js" />
-    <Content Include="Assets\Lib\angular.js" />
+    <Content Include="Assets\angular-sanitize.js" />
+    <Content Include="Assets\angular.js" />
     <Content Include="Assets\module.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -122,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Angular%40Parts.Title.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Angular%40Parts.Common.Metadata.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,3 +1,15 @@
-﻿<input ng-model="contentItemId" type="text" /><button ng-click="getContentItem(contentItemId)">Get</button>
+﻿@{ 
+    Script.Include("Lib.js").AtFoot();
 
-<div ng-include="'/OrchardLocal/raven.asyncshapes/templates/index?contenttype=' + model.contentType + 'displayType=' + model.displayType" ></div>
+}
+<div ng-app="AsyncShapes">
+
+    <div ng-controller="AsyncShapesCntrl">
+        <input ng-model="contentItemId" type="text" /><button ng-click="updateItem(contentItemId)">Get</button>
+
+        <div ng-include="model.templateUrl"></div>
+
+    </div>
+
+</div>
+

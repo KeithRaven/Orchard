@@ -4,12 +4,16 @@
 }
 <div ng-app="AsyncShapes">
 
-    <div ng-controller="AsyncShapesCntrl">
+  
         <input ng-model="contentItemId" type="text" /><button ng-click="updateItem(contentItemId)">Get</button>
 
-        <div ng-include="model.templateUrl"></div>
+        <select ng-model="displayType">
+            <option value="Detail">Detail</option>
+            <option value="Detail">Details</option>
+            <option value="Summary">Summary</option>
+        </select>
 
-    </div>
+        <rv-content-item content-item-id="{{contentItemId}}" display-type="{{displayType}}"></rv-content-item>
 
 </div>
 

@@ -2,6 +2,8 @@
 @{
     
     string name = Model.ContentField.DisplayName;
+    string partName = Model.ContentPart.PartDefinition.Name;
+    partName = partName.DropFirst();
     name = name.ToCamelCase();
 }
-<p class="text-field" ng-if="model.@(name).value"><span class="name">@name:</span> <span class="value" ng-bind="model.@(name).value"></span></p>
+<p class="text-field" ng-if="model.@(partName).@(name)"><span class="name">@name:</span> <span class="value" ng-bind="model.@(partName).@(name)"></span></p>

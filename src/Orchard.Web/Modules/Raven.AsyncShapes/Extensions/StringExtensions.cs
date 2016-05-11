@@ -7,6 +7,15 @@ namespace Raven.AsyncShapes.Extensions
 {
     public static class StringExtensions
     {
+        public static string DropFirst(this string input) {
+            if (string.IsNullOrEmpty(input)) {
+                return input;
+            }
+
+            return input.Substring(0, 1).ToLower() +
+                    input.Substring(1);
+        }
+
         public static string ToCamelCase(this string the_string)
         {
             // If there are 0 or 1 characters, just return the string.

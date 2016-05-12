@@ -5,13 +5,13 @@
 <div ng-app="AsyncShapes">
 
   
-        <input ng-model="contentItemId" type="text" /><button ng-click="updateItem(contentItemId)">Get</button>
+        <input ng-model="contentItemId" type="text" />
 
         <select ng-model="displayType">
             <option value="Detail">Detail</option>
-            <option value="Details">Details</option>
-            <option value="Summary">Summary</option>
         </select>
+    
+    <button ng-click="updateItem(contentItemId)">Get</button>
 
         <rv-content-item content-item-id="{{contentItemId}}" display-type="{{displayType}}"></rv-content-item>
 

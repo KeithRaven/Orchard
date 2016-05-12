@@ -1,9 +1,10 @@
 ﻿@using Raven.AsyncShapes.Extensions
 @{
-    
+
     string name = Model.ContentField.DisplayName;
+    string fieldName = Model.ContentField.Name;
     string partName = Model.ContentPart.PartDefinition.Name;
     partName = partName.DropFirst();
-    name = name.ToCamelCase();
+    fieldName = fieldName.ToCamelCase();
 }
-<p class="text-field" ng-if="model.@(partName).@(name).value"><span class="name">@name:</span> <span class="value" ng-bind="model.@(partName).@(name).value"></span></p>
+<p class="text-field" ng-if="model.@(partName).@(fieldName).value"><span class="name">@name:</span> <span class="value" ng-bind="model.@(partName).@(fieldName).value"></span></p>

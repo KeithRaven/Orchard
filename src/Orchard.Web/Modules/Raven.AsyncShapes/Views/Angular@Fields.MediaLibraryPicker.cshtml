@@ -7,7 +7,7 @@
     string fieldName = Model.ContentField.Name;
     string partName = Model.ContentPart.PartDefinition.Name;
     partName = partName.DropFirst();
-    fieldName = fieldName.ToCamelCase();
+    fieldName = fieldName.DropFirst();
 }
 
 <section class="media-library-picker-field media-library-picker-field-@name.HtmlClassify()">

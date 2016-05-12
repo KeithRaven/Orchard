@@ -1,4 +1,4 @@
-﻿angular.module("AsyncShapes").directive('rvContentItem', function ($http, $templateCache, $compile, $parse) {
+﻿angular.module("AsyncShapes").directive('rvContentItem', function ($http, $templateCache, $compile, $parse, $timeout) {
     return {
         restrict: 'AE',
         scope: {
@@ -8,6 +8,9 @@
         link: function (scope, iElement, iAttrs) {
 
 
+            var tempContentItemId = '',
+                tempItemDisplayType,
+                itemIdTimeout;
 
             function UpdateContent(contentItemId, displayType) {
 
@@ -15,27 +18,38 @@
                     return;
                 }
 
-                $http.get('/api/raven.api/' + scope.displayType + '/' + scope.contentItemId).then(function (response) {
+                if (itemIdTimeout) $timeout.cancel(itemIdTimeout);
 
-                    scope.model = response.data;
+                tempContentItemId = contentItemId;
+                tempItemDisplayType = displayType;
 
-                    $http.get(scope.model.templateUrl, { cache: $templateCache }).success(function (tplContent) {
-                        iElement.replaceWith($compile(tplContent)(scope));
+                itemIdTimeout = $timeout(function () {
+
+                    $http.get('/api/raven.api/' + scope.displayType + '/' + scope.contentItemId).then(function (response) {
+
+                        scope.model = response.data;
+
+                        $http.get(scope.model.templates.angular, { cache: $templateCache }).success(function (tplContent) {
+                            iElement.replaceWith($compile(tplContent)(scope));
+                        });
+
                     });
 
-                });
+                }, 150);
+
+                
 
             }
 
-            scope.$watch('contentItemId', function(newValue){
+            scope.$watch('contentItemId', function (newValue) {
+
+
                 UpdateContent(newValue,scope.displayType);
             });
 
             scope.$watch('displayType', function(newValue){
                 UpdateContent(scope.contentItemId,newValue);
             });
-
-         
         }
     }
 });

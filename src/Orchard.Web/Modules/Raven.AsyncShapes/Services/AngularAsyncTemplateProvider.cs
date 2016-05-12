@@ -10,6 +10,9 @@ namespace Raven.AsyncShapes.Services
 {
     public class AngularAsyncTemplateProvider : IAsyncTemplateProvider
     {
+        public string Identifier { get { return "Angular"; } }
+            
+
         public string GetTemplateUrl(RequestContext context, string ContentType, string displayType)
         {
             UrlHelper urlHelper = new UrlHelper(context);

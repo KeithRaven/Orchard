@@ -30,26 +30,27 @@
                         scope.model = response.data;
 
                         $http.get(scope.model.templates.angular, { cache: $templateCache }).success(function (tplContent) {
-                            iElement.replaceWith($compile(tplContent)(scope));
-                        });
 
+                            iElement.html(tplContent);
+                            $compile(iElement.contents())(scope);
+                         
+
+                        });
                     });
 
                 }, 150);
 
-                
-
             }
 
             scope.$watch('contentItemId', function (newValue) {
-
-
                 UpdateContent(newValue,scope.displayType);
             });
 
             scope.$watch('displayType', function(newValue){
                 UpdateContent(scope.contentItemId,newValue);
             });
+
+          
         }
     }
 });

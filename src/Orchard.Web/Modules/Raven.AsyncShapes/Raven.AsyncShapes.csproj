@@ -160,6 +160,9 @@
   <ItemGroup>
     <Content Include="Views\Angular%40Fields.TaxonomyField.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Angular%40Parts_TermPart.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

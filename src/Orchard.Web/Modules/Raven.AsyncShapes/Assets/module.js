@@ -1,2 +1,2 @@
-﻿angular.module("AsyncShapes", ["ngSanitize"]);
+﻿var app = angular.module("AsyncShapes", ["ngSanitize"]);
 

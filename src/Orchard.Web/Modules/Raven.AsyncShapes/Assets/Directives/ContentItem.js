@@ -25,7 +25,7 @@
 
                 itemIdTimeout = $timeout(function () {
 
-                    $http.get('/api/raven.api/' + scope.displayType + '/' + scope.contentItemId).then(function (response) {
+                    $http.get('/api/raven.api/item/' + scope.contentItemId + '/' + scope.displayType ).then(function (response) {
 
                         scope.model = response.data;
 
@@ -34,7 +34,6 @@
                             iElement.html(tplContent);
                             $compile(iElement.contents())(scope);
                          
-
                         });
                     });
 

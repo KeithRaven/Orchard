@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="Assets\angular-sanitize.js" />
     <Content Include="Assets\angular.js" />
+    <Content Include="Assets\Controllers\ItemController.js" />
     <Content Include="Assets\Directives\ContentItem.js" />
     <Content Include="Assets\Module.js" />
     <Content Include="Content\bootstrap.css" />
@@ -109,7 +110,6 @@
     <Compile Include="Services\AngularAsyncTemplateProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

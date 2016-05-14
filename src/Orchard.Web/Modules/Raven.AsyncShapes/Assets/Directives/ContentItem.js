@@ -3,7 +3,8 @@
         restrict: 'AE',
         scope: {
             contentItemId: '@',
-            displayType: '@'
+            displayType: '@',
+            resourceUrl: '@'
         },
         link: function (scope, iElement, iAttrs) {
 
@@ -12,20 +13,9 @@
                 tempItemDisplayType,
                 itemIdTimeout;
 
-            function UpdateContent(contentItemId, displayType) {
+            function updateContent(resourceUrl) {
 
-                if (!contentItemId || !displayType) {
-                    return;
-                }
-
-                if (itemIdTimeout) $timeout.cancel(itemIdTimeout);
-
-                tempContentItemId = contentItemId;
-                tempItemDisplayType = displayType;
-
-                itemIdTimeout = $timeout(function () {
-
-                    $http.get('/api/raven.api/item/' + scope.contentItemId + '/' + scope.displayType ).then(function (response) {
+                    $http.get(resourceUrl).then(function (response) {
 
                         scope.model = response.data;
 
@@ -37,18 +27,43 @@
                         });
                     });
 
-                }, 150);
-
+         
             }
 
+            function buildResourceUrl(contentItemId,displayType) {
+                
+                if (!contentItemId || !displayType) {
+                    return;
+                }
+
+                if (itemIdTimeout) $timeout.cancel(itemIdTimeout);
+
+                tempContentItemId = contentItemId;
+                tempItemDisplayType = displayType;
+
+                var resourceUrl = '/api/raven.api/item/' + contentItemId + '/' + displayType;
+
+                itemIdTimeout = $timeout(function () { updateContent(resourceUrl) },150);
+            }
+
+            scope.navigate = function (resourceUrl) {
+                scope.$emit('navigate', { resourceUrl: resourceUrl });
+            };
+
             scope.$watch('contentItemId', function (newValue) {
-                UpdateContent(newValue,scope.displayType);
+                buildResourceUrl(newValue, scope.displayType);
             });
 
-            scope.$watch('displayType', function(newValue){
-                UpdateContent(scope.contentItemId,newValue);
+            scope.$watch('displayType', function (newValue) {
+                buildResourceUrl(scope.contentItemId, newValue);
             });
 
+            scope.$watch('resourceUrl', function (newValue) {
+                if (!newValue)
+                    return;
+
+                updateContent(newValue);
+            });
           
         }
     }

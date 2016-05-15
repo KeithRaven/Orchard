@@ -6,28 +6,17 @@
             displayType: '@',
             resourceUrl: '@'
         },
+        template:'<div ng-include="model.templates.angular"></div>',
         link: function (scope, iElement, iAttrs) {
 
-
-            var tempContentItemId = '',
-                tempItemDisplayType,
-                itemIdTimeout;
+            var itemIdTimeout;
 
             function updateContent(resourceUrl) {
 
                     $http.get(resourceUrl).then(function (response) {
-
                         scope.model = response.data;
-
-                        $http.get(scope.model.templates.angular, { cache: $templateCache }).success(function (tplContent) {
-
-                            iElement.html(tplContent);
-                            $compile(iElement.contents())(scope);
-                         
-                        });
                     });
 
-         
             }
 
             function buildResourceUrl(contentItemId,displayType) {
@@ -37,9 +26,6 @@
                 }
 
                 if (itemIdTimeout) $timeout.cancel(itemIdTimeout);
-
-                tempContentItemId = contentItemId;
-                tempItemDisplayType = displayType;
 
                 var resourceUrl = '/api/raven.api/item/' + contentItemId + '/' + displayType;
 

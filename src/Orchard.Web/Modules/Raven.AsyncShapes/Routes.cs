@@ -26,7 +26,7 @@ namespace Raven.AsyncShapes
                             {"area", "Raven.AsyncShapes"},
                             {"controller", "Templates"},
                             {"action", "Index"},
-                            { "displayType", "Summary"}
+                            { "displayType", "Detail"}
                         },
                         new RouteValueDictionary {
                         },

@@ -4,9 +4,10 @@
         scope: {
             contentItemId: '@',
             displayType: '@',
-            resourceUrl: '@'
+            resourceUrl: '@',
+            contentItem: '='
         },
-        template:'<div ng-include="model.templates.angular"></div>',
+        template: '<div ng-include="model.templates.angular"></div>',
         link: function (scope, iElement, iAttrs) {
 
             var itemIdTimeout;
@@ -27,7 +28,10 @@
 
                 if (itemIdTimeout) $timeout.cancel(itemIdTimeout);
 
-                var resourceUrl = '/api/raven.api/item/' + contentItemId + '/' + displayType;
+                var resourceUrl = '/api/raven.api/item/' + contentItemId;
+                if (displayType !== "Detail") {
+                    resourceUrl +=  '/' + displayTypel
+                }
 
                 itemIdTimeout = $timeout(function () { updateContent(resourceUrl) },150);
             }
@@ -49,6 +53,11 @@
                     return;
 
                 updateContent(newValue);
+            });
+
+            
+            scope.$watch('contentItem', function (newValue) {
+                scope.model = newValue;
             });
           
         }

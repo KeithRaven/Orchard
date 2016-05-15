@@ -1,0 +1,26 @@
+﻿
+@using Orchard.ContentManagement
+@using Orchard.Utility.Extensions
+@using Orchard.DisplayManagement.Descriptors;
+
+@{
+    var displayHelper = Display;
+    displayHelper.BindingAction = BindingAction.Angular;
+}
+<div>
+    <header>
+        @if (Model.Meta != null) {
+            Display(Model.Meta);
+        }
+
+        @Display(Model.Header)
+    </header>
+
+    @Display(Model.Content)
+
+    @if (Model.Footer != null) {
+        <footer>
+            @Display(Model.Footer);
+        </footer>
+    }
+</div>

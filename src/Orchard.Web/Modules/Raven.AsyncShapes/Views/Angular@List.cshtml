@@ -7,6 +7,6 @@
 
 <ul ng-class="@(listPath).classes">
     <li ng-repeat="item in @(listPath).items" ng-class="@(listPath).itemClasses">
-        <div><div rv-content-item @*content-item-id="{{item.metadata.id}}" display-type="Detail"*@ resource-url="{{item.metadata.resourceUrl}}"></div></div>
+        <div><div rv-content-item @*content-item-id="{{item.metadata.id}}" display-type="Detail" resource-url="{{item.metadata.resourceUrl}}"*@ content-item="item"></div></div>
     </li>
 </ul>

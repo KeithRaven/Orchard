@@ -1,3 +1,6 @@
 [submodule "src/Orchard.Web/Modules/Raven.Api"]
 	path = src/Orchard.Web/Modules/Raven.Api
 	url = https://github.com/KeithRaven/Raven.Api.git
+[submodule "src/Orchard.Web/Modules/Raven.AsyncTemplates"]
+	path = src/Orchard.Web/Modules/Raven.AsyncTemplates
+	url = https://github.com/KeithRaven/Raven.AsyncTemplates.git

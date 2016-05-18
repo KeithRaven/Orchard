@@ -1,9 +1,6 @@
-
 @using Orchard.DisplayManagement.Descriptors;
 @{
-    var displayHelper = Display;
-    displayHelper.BindingAction = BindingAction.Angular;
-
+    Display.BindingAction = BindingAction.Angular;
     Model.ContentItems.ContentPart = Model.ContentPart;
 }
 @Display(Model.ContentItems)

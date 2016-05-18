@@ -1,12 +1,8 @@
-﻿
-@using Orchard.ContentManagement
-@using Orchard.Utility.Extensions
-@using Orchard.DisplayManagement.Descriptors;
-
-@{
-    var displayHelper = Display;
-    displayHelper.BindingAction = BindingAction.Angular;
+﻿@using Orchard.DisplayManagement.Descriptors;
+@{ 
+    Display.BindingAction = BindingAction.Angular;
 }
+
 <div>
     <header>
         @if (Model.Meta != null) {
@@ -17,6 +13,7 @@
     </header>
 
     @Display(Model.Content)
+    
 
     @if (Model.Footer != null) {
         <footer>

@@ -1,11 +1,6 @@
-﻿
-@using Orchard.ContentManagement
-@using Orchard.Utility.Extensions
-@using Orchard.DisplayManagement.Descriptors;
-
+﻿@using Orchard.DisplayManagement.Descriptors;
 @{
-    var displayHelper = Display;
-    displayHelper.BindingAction = BindingAction.Angular;
+    Display.BindingAction = BindingAction.Angular;
 }
 <div>
     <header>

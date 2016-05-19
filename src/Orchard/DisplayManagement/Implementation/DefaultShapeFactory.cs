@@ -9,6 +9,7 @@ namespace Orchard.DisplayManagement.Implementation {
     public class DefaultShapeFactory : Composite, IShapeFactory {
         private readonly IEnumerable<Lazy<IShapeFactoryEvents>> _events;
         private readonly Lazy<IShapeTableLocator> _shapeTableLocator;
+        public string BindingType { get; set; }
 
         public DefaultShapeFactory(
             IEnumerable<Lazy<IShapeFactoryEvents>> events,
@@ -16,6 +17,7 @@ namespace Orchard.DisplayManagement.Implementation {
         {
             _events = events;
             _shapeTableLocator = shapeTableLocator;
+            BindingType = "Display";
         }
 
         public override bool TryInvokeMember(System.Dynamic.InvokeMemberBinder binder, object[] args, out object result) {
@@ -81,6 +83,7 @@ namespace Orchard.DisplayManagement.Implementation {
 
             ShapeMetadata shapeMetadata = createdContext.Shape.Metadata;
             createdContext.Shape.Metadata.Type = shapeType;
+            createdContext.Shape.Metadata.BindingType = this.BindingType;
 
             if (shapeDescriptor != null)
                 shapeMetadata.Wrappers = shapeMetadata.Wrappers.Concat(shapeDescriptor.Wrappers).ToList();

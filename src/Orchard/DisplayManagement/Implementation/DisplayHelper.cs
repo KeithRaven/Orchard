@@ -25,7 +25,6 @@ namespace Orchard.DisplayManagement.Implementation {
 
         public ViewContext ViewContext { get; set; }
         public IViewDataContainer ViewDataContainer { get; set; }
-        public BindingAction BindingAction { get; set; }
 
         public override bool TryInvoke(InvokeBinder binder, object[] args, out object result) {
             result = Invoke(null, Arguments.From(args, binder.CallInfo.ArgumentNames));
@@ -84,7 +83,7 @@ namespace Orchard.DisplayManagement.Implementation {
                 return new HtmlString(string.Empty);
             }
 
-            var context = new DisplayContext { Display = this, Value = shape, ViewContext = ViewContext, ViewDataContainer = ViewDataContainer, BindingAction = BindingAction };
+            var context = new DisplayContext { Display = this, Value = shape, ViewContext = ViewContext, ViewDataContainer = ViewDataContainer, BindingType = ((dynamic)shape).Metadata.BindingType ?? "Display" };
             return _displayManager.Execute(context);
         }
 

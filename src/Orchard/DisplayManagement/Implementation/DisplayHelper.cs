@@ -83,7 +83,7 @@ namespace Orchard.DisplayManagement.Implementation {
                 return new HtmlString(string.Empty);
             }
 
-            var context = new DisplayContext { Display = this, Value = shape, ViewContext = ViewContext, ViewDataContainer = ViewDataContainer, BindingType = ((dynamic)shape).Metadata.BindingType ?? "Display" };
+            var context = new DisplayContext { Display = this, Value = shape, ViewContext = ViewContext, ViewDataContainer = ViewDataContainer };
             return _displayManager.Execute(context);
         }
 

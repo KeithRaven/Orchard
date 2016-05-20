@@ -61,6 +61,9 @@ namespace Orchard.DisplayManagement.Implementation {
             if (shapeMetadata == null || string.IsNullOrEmpty(shapeMetadata.Type))
                 return CoerceHtmlString(context.Value);
 
+            //we now know its a shape and we have metadata
+            context.BindingType = shapeMetadata.BindingType ?? "Display";
+
             var workContext = _workContextAccessor.GetContext();
             var shapeTable = !_httpContextAccessor.Current().IsBackgroundContext()
                 ? _shapeTableLocator.Value.Lookup(workContext.CurrentTheme.Id)

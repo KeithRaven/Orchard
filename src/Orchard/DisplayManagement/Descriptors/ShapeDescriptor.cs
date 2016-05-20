@@ -5,7 +5,6 @@ using System.Web;
 using Orchard.DisplayManagement.Implementation;
 
 namespace Orchard.DisplayManagement.Descriptors {
-
     public class ShapeDescriptor {
         public ShapeDescriptor() {
             Creating = Enumerable.Empty<Action<ShapeCreatingContext>>();

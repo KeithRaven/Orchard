@@ -1,5 +1,4 @@
 ﻿using System;
-﻿using Orchard.DisplayManagement.Descriptors;
 
 namespace Orchard.DisplayManagement {
     public class ShapeAttribute : Attribute {

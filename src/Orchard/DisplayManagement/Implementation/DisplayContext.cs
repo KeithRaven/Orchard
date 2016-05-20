@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-﻿using Orchard.DisplayManagement.Descriptors;
 
 namespace Orchard.DisplayManagement.Implementation {
     public class DisplayContext  {

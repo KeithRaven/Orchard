@@ -14,7 +14,6 @@ namespace Orchard.DisplayManagement.Descriptors {
         readonly IList<Action<ShapeDescriptor>> _configurations = new List<Action<ShapeDescriptor>>();
         string _bindingType;
 
-
         public ShapeAlterationBuilder(Feature feature, string shapeType) {
             _feature = feature;
             _bindingName = shapeType;

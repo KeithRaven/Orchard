@@ -12,7 +12,7 @@ namespace Orchard.DisplayManagement.Shapes {
             BindingSources = new List<string>();
             Displaying = Enumerable.Empty<Action<ShapeDisplayingContext>>();
             Displayed = Enumerable.Empty<Action<ShapeDisplayedContext>>();
-            BindingType = string.Empty;
+            BindingType = "Display";
         }
 
         public string Type { get; set; }

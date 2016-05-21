@@ -9,7 +9,6 @@ namespace Orchard.DisplayManagement {
         IShape Create(string shapeType);
         IShape Create(string shapeType, INamedEnumerable<object> parameters);
         IShape Create(string shapeType, INamedEnumerable<object> parameters, Func<dynamic> createShape);
-        string BindingType { get; set; }
     }
 }
 

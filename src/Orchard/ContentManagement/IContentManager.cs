@@ -119,7 +119,7 @@ namespace Orchard.ContentManagement {
         /// <param name="displayType">The display type (e.g. Summary, Detail) to use</param>
         /// <param name="groupId">Id of the display group (stored in the content item's metadata)</param>
         /// <returns>The display shape</returns>
-        dynamic BuildDisplay(IContent content, string displayType = "", string groupId = "", string bindingType = "");
+        dynamic BuildDisplay(IContent content, string displayType = "", string groupId = "");
 
         /// <summary>
         /// Builds the editor shape of the specified content item
@@ -140,7 +140,7 @@ namespace Orchard.ContentManagement {
     }
 
     public interface IContentDisplay : IDependency {
-        dynamic BuildDisplay(IContent content, string displayType = "", string groupId = "", string bindingType = "");
+        dynamic BuildDisplay(IContent content, string displayType = "", string groupId = "");
         dynamic BuildEditor(IContent content, string groupId = "");
         dynamic UpdateEditor(IContent content, IUpdateModel updater, string groupId = "");
     }

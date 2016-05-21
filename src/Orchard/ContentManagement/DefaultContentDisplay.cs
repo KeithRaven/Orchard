@@ -38,15 +38,8 @@ namespace Orchard.ContentManagement {
 
         public ILogger Logger { get; set; }
 
-        public dynamic BuildDisplay(IContent content, string displayType, string groupId, string bindingType) {
+        public dynamic BuildDisplay(IContent content, string displayType, string groupId) {
 
-            //this feels dirty and needs working out - ditto end of method
-            var originalBindingType = _shapeFactory.BindingType;
-
-            if (!string.IsNullOrEmpty(bindingType)) {
-                _shapeFactory.BindingType = bindingType;
-            }
-            
             var contentTypeDefinition = content.ContentItem.TypeDefinition;
             string stereotype;
             if (!contentTypeDefinition.Settings.TryGetValue("Stereotype", out stereotype))
@@ -54,12 +47,10 @@ namespace Orchard.ContentManagement {
 
             var actualShapeType = stereotype;
             var actualDisplayType = string.IsNullOrWhiteSpace(displayType) ? "Detail" : displayType;
-            var actualBindingType = string.IsNullOrWhiteSpace(bindingType) ? _shapeFactory.BindingType : bindingType;
 
             dynamic itemShape = CreateItemShape(actualShapeType);
             itemShape.ContentItem = content.ContentItem;
             itemShape.Metadata.DisplayType = actualDisplayType;
-            itemShape.Metadata.BindingType = actualBindingType;
 
             var context = new BuildDisplayContext(itemShape, content, actualDisplayType, groupId, _shapeFactory);
             var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
@@ -68,8 +59,6 @@ namespace Orchard.ContentManagement {
             BindPlacement(context, actualDisplayType, stereotype);
 
             _handlers.Value.Invoke(handler => handler.BuildDisplay(context), Logger);
-
-            _shapeFactory.BindingType = originalBindingType;
 
             return context.Shape;
         }

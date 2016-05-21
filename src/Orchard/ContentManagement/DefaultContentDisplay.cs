@@ -39,7 +39,6 @@ namespace Orchard.ContentManagement {
         public ILogger Logger { get; set; }
 
         public dynamic BuildDisplay(IContent content, string displayType, string groupId) {
-
             var contentTypeDefinition = content.ContentItem.TypeDefinition;
             string stereotype;
             if (!contentTypeDefinition.Settings.TryGetValue("Stereotype", out stereotype))
@@ -59,7 +58,6 @@ namespace Orchard.ContentManagement {
             BindPlacement(context, actualDisplayType, stereotype);
 
             _handlers.Value.Invoke(handler => handler.BuildDisplay(context), Logger);
-
             return context.Shape;
         }
 

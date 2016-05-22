@@ -72,13 +72,10 @@ namespace Orchard.DisplayManagement.Implementation {
             };
             _shapeDisplayEvents.Invoke(sde => sde.Displaying(displayingContext), Logger);
 
-            //we now know its a shape and we have metadata
-            context.BindingType = shapeMetadata.BindingType;
-
             // find base shape association using only the fundamental shape type. 
             // alternates that may already be registered do not affect the "displaying" event calls
             ShapeBinding shapeBinding;
-            if (TryGetDescriptorBinding(shapeMetadata.Type, Enumerable.Empty<string>(), shapeTable, context, out shapeBinding)) {
+            if (TryGetDescriptorBinding(shapeMetadata.Type, Enumerable.Empty<string>(), shapeTable, shapeMetadata.BindingType, out shapeBinding)) {
                 shapeBinding.ShapeDescriptor.Displaying.Invoke(action => action(displayingContext), Logger);
 
                 // copy all binding sources (all templates for this shape) in order to use them as Localization scopes
@@ -98,7 +95,7 @@ namespace Orchard.DisplayManagement.Implementation {
             else {
                 // now find the actual binding to render, taking alternates into account
                 ShapeBinding actualBinding;
-                if (TryGetDescriptorBinding(shapeMetadata.Type, shapeMetadata.Alternates, shapeTable, context, out actualBinding)) {
+                if (TryGetDescriptorBinding(shapeMetadata.Type, shapeMetadata.Alternates, shapeTable, shapeMetadata.BindingType, out actualBinding)) {
                     shape.Metadata.ChildContent = Process(actualBinding, shape, context);
                 }
                 else {
@@ -108,7 +105,7 @@ namespace Orchard.DisplayManagement.Implementation {
 
             foreach (var frameType in shape.Metadata.Wrappers) {
                 ShapeBinding frameBinding;
-                if (TryGetDescriptorBinding(frameType, Enumerable.Empty<string>(), shapeTable, context, out frameBinding)) {
+                if (TryGetDescriptorBinding(frameType, Enumerable.Empty<string>(), shapeTable, shapeMetadata.BindingType, out frameBinding)) {
                     shape.Metadata.ChildContent = Process(frameBinding, shape, context);
                 }
             }
@@ -143,7 +140,7 @@ namespace Orchard.DisplayManagement.Implementation {
             return shape.Metadata.ChildContent;
         }
 
-        private bool TryGetDescriptorBinding(string shapeType, IEnumerable<string> shapeAlternates, ShapeTable shapeTable, DisplayContext displayContext, out ShapeBinding shapeBinding) {
+        private bool TryGetDescriptorBinding(string shapeType, IEnumerable<string> shapeAlternates, ShapeTable shapeTable, string bindingType, out ShapeBinding shapeBinding) {
             // shape alternates are optional, fully qualified binding names
             // the earliest added alternates have the lowest priority
             // the descriptor returned is based on the binding that is matched, so it may be an entirely
@@ -151,12 +148,12 @@ namespace Orchard.DisplayManagement.Implementation {
             foreach (var shapeAlternate in shapeAlternates.Reverse()) {
 
                 foreach (var shapeBindingResolver in _shapeBindingResolvers) {
-                    if (shapeBindingResolver.TryGetDescriptorBinding(shapeAlternate, out shapeBinding)) {
+                    if(shapeBindingResolver.TryGetDescriptorBinding(shapeAlternate, out shapeBinding)) {
                         return true;
                     }
                 }
 
-                if (shapeTable.Bindings.TryGetValue(string.Concat(displayContext.BindingType, "@", shapeAlternate), out shapeBinding)) {
+                if (shapeTable.Bindings.TryGetValue(string.Concat(bindingType, "@", shapeAlternate), out shapeBinding)) {
                     return true;
                 }
             }
@@ -172,7 +169,7 @@ namespace Orchard.DisplayManagement.Implementation {
                     }
                 }
 
-                if (shapeTable.Bindings.TryGetValue(string.Concat(displayContext.BindingType, "@", shapeTypeScan), out shapeBinding)) {
+                if (shapeTable.Bindings.TryGetValue(string.Concat(bindingType, "@", shapeTypeScan), out shapeBinding)) {
                     return true;
                 }
                
